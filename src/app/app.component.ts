@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from './todo.model';
 import { TodoService } from './todo.service';
+import { TodoStoreService } from './todo-store.service';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,11 @@ import { TodoService } from './todo.service';
 })
 export class AppComponent implements OnInit {
   
-  todos: Todo[];
-
-  constructor(private todoService: TodoService) {
+  constructor(private todoStoreService: TodoStoreService) {
   }
 
   ngOnInit(): void {
-    this.loadTodos();
-  }
-
-  loadTodos() {
-    this.todoService.all().subscribe(todos => this.todos = todos);
+    
   }
 
   handleAdd(value: string) {
@@ -27,15 +22,11 @@ export class AppComponent implements OnInit {
       id: null,
       name: value  
     }
-    this.todoService.create(todo).subscribe(
-      res => this.loadTodos()
-    )
+    this.todoStoreService.addTodo(todo);
   }
 
   handleDelete(todo: Todo) {
-    this.todoService.delete(todo).subscribe(
-      res => this.loadTodos()
-    )
+    this.todoStoreService.deleteTodo(todo);
   }
 
 }
