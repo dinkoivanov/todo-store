@@ -22,11 +22,11 @@ export class AppComponent implements OnInit {
       id: null,
       name: value  
     }
-    this.todoStoreService.addTodo(todo);
+    this.todoStoreService.add(todo);
   }
 
   handleDelete(todo: Todo) {
-    this.todoStoreService.deleteTodo(todo);
+    this.todoStoreService.delete(todo);
   }
 
 }
